@@ -25,7 +25,7 @@ def run_once(service: str) -> list[dict[str, Any]] | None:
         [sys.executable, "scorecard.py", "research", service, "-f", "json"],
         capture_output=True,
         text=True,
-        cwd="/home/parolin/script/scorecard_agent",
+        cwd="/home/user/script/scorecard_agent",
         timeout=120,
     )
     if result.returncode != 0:
