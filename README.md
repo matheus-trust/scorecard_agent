@@ -218,3 +218,15 @@ Rendered output always contains:
 - The tool does not use non-AWS sources.
 - The tool is intentionally strict so bad citations or malformed rows are caught early.
 - The `research` command uses best-effort discovery and heuristics over AWS documentation pages, so it is much faster than manual work but you should still spot-check the output for edge-case services.
+
+## Consistency Testing
+
+`test_consistency.py` verifies that the `research` command returns identical results across repeated runs for the same service.
+
+It runs each service 4 times, compares every `score` and `info` field across runs, and reports any differences.
+
+```bash
+python3 test_consistency.py
+```
+
+The default test covers Amazon S3, Amazon SQS, Amazon DynamoDB, AWS Lambda, and Amazon SNS. Edit the `SERVICES` list at the top of the file to test other services, and `RUNS` to change the number of repetitions per service.
