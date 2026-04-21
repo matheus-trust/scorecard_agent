@@ -1,0 +1,144 @@
+{
+  "service": "Amazon SQS",
+  "rows": [
+    {
+      "id": "identity_management",
+      "description": "List the security authority or authorities that manage access for the service.",
+      "instructions": "Set score to the service names used for managing access, usually AWS IAM.",
+      "research": {
+        "info": [
+          "https://docs.aws.amazon.com/"
+        ],
+        "notes": "Replace this with the exact AWS doc links and extracted evidence.",
+        "authorities": [
+          "AWS IAM"
+        ]
+      }
+    },
+    {
+      "id": "resource_based",
+      "description": "Whether the service supports resource-based policies on its resources.",
+      "instructions": "Set score to \"Yes\" or \"No\".",
+      "research": {
+        "info": [
+          "https://docs.aws.amazon.com/"
+        ],
+        "notes": "Replace this with the exact AWS doc links and extracted evidence.",
+        "value": true
+      }
+    },
+    {
+      "id": "network_filtering",
+      "description": "Whether any network filtering applies to the service or resource.",
+      "instructions": "Describe the network filtering mechanism, or set score to No if none applies.",
+      "research": {
+        "info": [
+          "https://docs.aws.amazon.com/"
+        ],
+        "notes": "Replace this with the exact AWS doc links and extracted evidence.",
+        "description": "Example: Security groups on VPC endpoints"
+      }
+    },
+    {
+      "id": "encryption_at_rest",
+      "description": "Whether encryption at rest is supported.",
+      "instructions": "Use one of the approved score templates and adapt it only where the template explicitly expects resource names.",
+      "research": {
+        "info": [
+          "https://docs.aws.amazon.com/"
+        ],
+        "notes": "Replace this with the exact AWS doc links and extracted evidence.",
+        "option": "customer_managed_keys",
+        "resources": [
+          "Example resource"
+        ]
+      }
+    },
+    {
+      "id": "encryption_in_transit",
+      "description": "Whether data in transit is encrypted.",
+      "instructions": "Set score to \"Yes\" or \"No\".",
+      "research": {
+        "info": [
+          "https://docs.aws.amazon.com/"
+        ],
+        "notes": "Replace this with the exact AWS doc links and extracted evidence.",
+        "value": true
+      }
+    },
+    {
+      "id": "aws_cloudformation",
+      "description": "Whether CloudFormation supports native resources for the service.",
+      "instructions": "Set score to a link whose visible text is the supported resource count, for example <a href=\"...\">10</a>. Use 0 with no link if unsupported.",
+      "research": {
+        "info": [
+          "https://docs.aws.amazon.com/"
+        ],
+        "notes": "Replace this with the exact AWS doc links and extracted evidence.",
+        "resource_count": 1,
+        "resource_page": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/AWS_Example.html"
+      }
+    },
+    {
+      "id": "aws_tag_based_abac",
+      "description": "Whether the service supports tag-based ABAC.",
+      "instructions": "Set score to \"Yes\" or \"No\".",
+      "research": {
+        "info": [
+          "https://docs.aws.amazon.com/"
+        ],
+        "notes": "Replace this with the exact AWS doc links and extracted evidence.",
+        "value": true
+      }
+    },
+    {
+      "id": "aws_cloudwatch_events",
+      "description": "Whether activity is logged or delivered through CloudTrail.",
+      "instructions": "Set score to \"Yes\" or \"No\".",
+      "research": {
+        "info": [
+          "https://docs.aws.amazon.com/"
+        ],
+        "notes": "Replace this with the exact AWS doc links and extracted evidence.",
+        "value": true
+      }
+    },
+    {
+      "id": "aws_vpc_endpoint",
+      "description": "Whether the service supports VPC endpoints.",
+      "instructions": "Set score to \"Yes\" or \"No\". If there are multiple endpoint types, use Yes (<types>).",
+      "research": {
+        "info": [
+          "https://docs.aws.amazon.com/"
+        ],
+        "notes": "Replace this with the exact AWS doc links and extracted evidence.",
+        "supported": true,
+        "endpoint_types": [
+          "Control plane",
+          "Data plane"
+        ]
+      }
+    },
+    {
+      "id": "aws_vpc_endpoint_policy",
+      "description": "Whether endpoint policies can be attached to the VPC endpoint.",
+      "instructions": "Set score to \"Yes\" or \"No\". If there are multiple endpoint types, score each type explicitly.",
+      "research": {
+        "info": [
+          "https://docs.aws.amazon.com/"
+        ],
+        "notes": "Replace this with the exact AWS doc links and extracted evidence.",
+        "answers": [
+          {
+            "endpoint_type": "Control plane",
+            "supported": true
+          },
+          {
+            "endpoint_type": "Data plane",
+            "supported": false
+          }
+        ]
+      }
+    }
+  ]
+}
