@@ -21,6 +21,7 @@ IAM_SERVICES_URL = "https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_a
 EVENTBRIDGE_CLOUDTRAIL_URL = "https://docs.aws.amazon.com/eventbridge/latest/userguide/logging-using-cloudtrail.html"
 CLOUDFORMATION_INDEX_URL = "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-template-resource-type-ref.html"
 CLOUDTRAIL_INDEX_URL = "https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-supported-services.html"
+GENERAL_REF_BASE = "https://docs.aws.amazon.com/general/latest/gr/"
 
 
 def normalize_space(value: str) -> str:
@@ -488,6 +489,17 @@ class AwsDocsResearcher:
         return {"value": False, "info": [IAM_SERVICES_URL]}
 
     def research_encryption_in_transit(self) -> dict[str, Any]:
+        # The general reference endpoint page lists only HTTPS when HTTP is unavailable,
+        # making it the strongest proof. Try it before scanning candidate pages.
+        endpoint_url = f"{GENERAL_REF_BASE}{self.service_token}.html"
+        try:
+            endpoint_page = self.fetch_page(endpoint_url)
+            first_line = endpoint_page.text.splitlines()[0] if endpoint_page.text else ""
+            if "page not found" not in first_line.lower() and "https" in endpoint_page.text.lower():
+                return {"value": True, "info": [endpoint_url]}
+        except Exception:
+            pass
+
         for page in self._candidate_service_pages():
             text = page.text.lower()
             if "https" in text or "tls" in text or "ssl" in text:
